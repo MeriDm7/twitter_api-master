@@ -23,7 +23,6 @@ while True:
     data = connection.read().decode()
 
     js = json.loads(data)
-    print(js)
     if len(js) > 1:
         break
 
