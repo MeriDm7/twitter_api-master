@@ -15,7 +15,8 @@ ctx.verify_mode = ssl.CERT_NONE
 
 while True:
     acct = input('Enter Twitter Account:')
-    if (len(acct) < 1): break
+    if len(acct) < 1:
+        break
     url = twurl.augment(TWITTER_URL,
                         {'screen_name': acct, 'count': '1000'})
     connection = urllib.request.urlopen(url, context=ctx)
@@ -42,7 +43,7 @@ def get_information(json_file):
         for i in lst_with_friends:
             str_with_friends += i + '  | '
         print(str_with_friends[:-1])
-        friend = input("Which friend do you want to chose?  ")
+        friend = input("Which friend do you want to chose? \n ")
         if friend not in lst_with_friends:
             return 'YOU CHOSE INCORRECT PERSON!'
         else:
@@ -53,18 +54,18 @@ def get_information(json_file):
             for i in keeys:
                 str_with_keys += i + ' |  '
             print(str_with_keys)
-            Key = input('Which key do you want to choose? ')
+            Key = input('Which key do you want to choose? \n' )
             if (Key != 'entities') and (Key != 'status'):
                 res = str(json_file[first_el][indexes][Key])
                 return "Information, that you wanted:  \n" + res
             elif Key == 'entities':
-                entities = input('url  |  description \n Choose, please ')
+                entities = input('url  |  description \n Choose, please \n ')
                 if entities == 'url':
-                    urls = input("url  |  expanded_url  |  display_url  |  indices \n Whan do you choose? ")
+                    urls = input("url  |  expanded_url  |  display_url  |  indices \n Whan do you choose? \n")
                     res = str(json_file[first_el][indexes][Key][entities]['urls'][0][urls])
                     return "Information, that you wanted:  \n" + res
                 elif entities == 'description':
-                    description = input("url  |  expanded_url  |  display_url  |  indices \n Whan do you choose? ")
+                    description = input("url  |  expanded_url  |  display_url  |  indices \n Whan do you choose?\n ")
                     res = str(json_file[first_el][indexes][Key][entities]['urls'][0][description])
                     return "Information, that you wanted:  \n" + res
             elif Key == 'status':
@@ -73,8 +74,8 @@ def get_information(json_file):
                 for i in k:
                     l_with_s_keys += i + " | "
                 print(l_with_s_keys)
-                status = input('What do you choose?')
-                if (status != 'entities') and (status != 'extended_entities'):
+                status = input('What do you choose? \n')
+                if status != 'entities':
                     res = str(json_file[first_el][indexes][Key][status])
                     return "Information, that you wanted:  \n" + res
                 elif status == 'entities':
@@ -83,34 +84,9 @@ def get_information(json_file):
                     for i in ent_keys:
                         s_w_k += i + ' | '
                     print(s_w_k)
-                    keeeey = input("What will you choose? ")
-                    if keeeey != 'media':
-                        res = str(json_file[first_el][indexes][Key][status][keeeey])
-                        return "Information, that you wanted:  \n" + res
-                    elif keeeey == 'media':
-                        new_keys = list(json_file[first_el][indexes][Key][status][keeeey][0].keys())
-                        print(new_keys)
-                        n_key = input("What will you choose?")
-                        if n_key != 'sizes':
-                            res = str(json_file[first_el][indexes][Key][status][keeeey][0][n_key])
-                            return "Information, that you wanted:  \n" + res
-                        elif n_key == 'sizes':
-                            size = list(json_file[first_el][indexes][Key][status][keeeey][0][n_key].keys())
-                            print(size)
-                            siize = input("What will you choose?  ")
-                            res = str(json_file[first_el][indexes][Key][status][keeeey][0][n_key][siize])
-                            return "Information, that you wanted:  \n" + res
-                elif status == 'extended_entities':
-                    stat = list(json_file[first_el][indexes][Key][status].keys())
-                    print(stat)
-                    stat_el = input("What will you choose?")
-                    res = str(json_file[first_el][indexes][Key][status][stat_el])
+                    keeeey = input("What will you choose? \n ")
+                    res = str(json_file[first_el][indexes][Key][status][keeeey])
                     return "Information, that you wanted:  \n" + res
-
-
-
-
-
 
 
 
